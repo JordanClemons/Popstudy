@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  backend:
+    build: ./backend
+    expose:
+      - 5000
+    ports:
+      - 5000:5000
+    # volumes:
+    #   - ./backend:/usr/src/app
+    # links:
+    #   - db
+#   db:
+#     image: mongo:latest
+#     ports:
+#       - 27017:27017
+    # volumes:
+    #   - mongodb_data_container:/data/db
+# volumes:
+#   mongodb_data_container:

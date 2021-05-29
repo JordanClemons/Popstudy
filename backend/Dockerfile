@@ -1,13 +1,11 @@
-FROM node:14.15.4
+FROM node:12.18.1
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY package*.json ./
+COPY ["package.json", "package-lock.json*", "./"]
 
 RUN npm install
 
 COPY . .
-
-EXPOSE 5000
 
 CMD [ "node", "server.js" ]
