@@ -18,7 +18,7 @@ mongoose.connect('mongodb://db:27017', options)
   })
   const connection = mongoose.connection;
   connection.once('open', () => {
-    console.log("MongoDB database connection established successfully" + process.env.DB_PASS + 'lol');
+    console.log("MongoDB database connection established successfully");
   })
 
 const authRouter = require('./routes/auth');

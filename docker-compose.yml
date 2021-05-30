@@ -10,6 +10,7 @@ services:
     environment:
       DB_USER: "${DB_USER}"
       DB_PASS: "${DB_PASS}"
+      JWT_SECRET: "${JWT_SECRET}"
     # volumes:
     #   - ./backend:/usr/src/app
     links:
@@ -20,6 +21,8 @@ services:
         MONGO_INITDB_ROOT_USERNAME: "${DB_USER}"
         MONGO_INITDB_ROOT_PASSWORD: "${DB_PASS}"
     command: [--auth]
+    logging:
+      driver: none
     ports:
       - 27017:27017
     # volumes:
