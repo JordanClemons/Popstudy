@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
   creator: {
-      type: Schema.Types.ObjectId,
-      ref: User
+      type: String,
+      required: true
   },
   private:{
       type: Boolean,
@@ -19,12 +19,7 @@ const postSchema = new Schema({
     type: Date,
     required: true
   },
-  content:[
-      {
-          question: String,
-          answer: String
-      }
-    ]
+  content:[]
 }, {
   timestamps: true,
 });

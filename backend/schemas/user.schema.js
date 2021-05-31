@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
+let Post = require('../schemas/post.schema')
 
 const userSchema = new Schema({
   username: {
@@ -17,7 +18,11 @@ const userSchema = new Schema({
     type: String,
     required: true,
     minlength: 9
-  }
+  },
+  myLikes:[{
+    type: Schema.Types.ObjectId, 
+    ref: Post
+  }]
 }, {
   timestamps: true,
 });

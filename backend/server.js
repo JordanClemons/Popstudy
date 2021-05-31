@@ -22,7 +22,9 @@ mongoose.connect('mongodb://db:27017', options)
   })
 
 const authRouter = require('./routes/auth');
+const postRouter = require('./routes/posts');
 app.use('/auth', authRouter); 
+app.use('/post', postRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on: ${port}`)
