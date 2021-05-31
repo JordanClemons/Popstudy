@@ -2,6 +2,28 @@ const router = require('express').Router();
 const jwt = require('jsonwebtoken');
 let Post = require('../schemas/post.schema')
 
+// Get all public posts
+router.route('/').get((req, res) =>{
+  var token = req.headers['authorization'];
+  const bearer = token.split(' ');
+  const bearerToken = bearer[1];
+  if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
+  
+  jwt.verify(bearerToken, process.env.JWT_SECRET, function(err, decoded) {
+    if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+    else{
+      Post.find({private: false}, function (err, posts) {
+        if (err){
+            console.log(err);
+        }
+        else{
+          res.send({allPosts:posts})
+        }
+    });
+    }
+  });
+});
+
 // Create post
 router.route('/create').post((req, res) =>{
     var token = req.headers['authorization'];
