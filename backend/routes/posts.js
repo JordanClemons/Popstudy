@@ -73,4 +73,23 @@ router.route('/me').get((req, res) =>{
   });
 });
 
+// Delete a post
+router.route('/delete').delete((req, res) =>{
+  var token = req.headers['authorization'];
+  const bearer = token.split(' ');
+  const bearerToken = bearer[1];
+  const id = req.body.id;
+  if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
+  
+  jwt.verify(bearerToken, process.env.JWT_SECRET, function(err, decoded) {
+    if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+    else{
+      Post.findOneAndDelete({_id: id, creator: decoded.username}, function (err, post) {
+        if(err) console.log(err);
+          res.status(200).json(post);
+      });
+    }
+  });
+});
+
 module.exports = router;
